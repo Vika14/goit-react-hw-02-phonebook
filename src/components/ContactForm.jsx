@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import css from './app.module.css';
 
 export class ContactForm extends Component {
@@ -7,9 +6,6 @@ export class ContactForm extends Component {
     name: '',
     number: '',
   };
-
-  nameInputId = nanoid();
-  numberInputId = nanoid();
 
   handleChange = e => {
     this.setState({
@@ -30,7 +26,7 @@ export class ContactForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={css.forma}>
-        <label htmlFor={this.nameInputId} className={css.nameNumber}>
+        <label className={css.nameNumber}>
           Name{' '}
           <input
             type="text"
@@ -40,11 +36,10 @@ export class ContactForm extends Component {
             required
             value={this.state.name}
             onChange={this.handleChange}
-            id={this.nameInputId}
             className={css.pole}
           />
         </label>
-        <label htmlFor={this.numberInputId} className={css.nameNumber}>
+        <label className={css.nameNumber}>
           Number{' '}
           <input
             type="tel"
@@ -54,7 +49,6 @@ export class ContactForm extends Component {
             required
             value={this.state.number}
             onChange={this.handleChange}
-            id={this.numberInputId}
             className={css.pole}
           />
         </label>

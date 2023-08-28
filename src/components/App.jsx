@@ -15,18 +15,20 @@ export class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = e => {
-    const id = nanoid();
-    const name = e.name;
-    const number = e.number;
-    const contacts = [...this.state.contacts];
-
-    if (contacts.findIndex(contact => name === contact.name) !== -1) {
+  formSubmitHandler = ({ name, number }) => {
+    const isDuplicate = this.state.contacts.some(
+      contact => name.toLowerCase() === contact.name.toLowerCase()
+    );
+    if (isDuplicate) {
       alert(`${name} is already in contacts.`);
-    } else {
-      contacts.push({ name, id, number });
+      return;
     }
-    this.setState({ contacts: contacts });
+
+    const id = nanoid();
+
+    this.setState(prevState => {
+      return { contacts: [...prevState.contacts, { name, id, number }] };
+    });
   };
 
   handleChange = e => {
